@@ -29,6 +29,7 @@ func init() {
 func serverModeHandler(redisConn net.Conn, bind string) {
 	// create default handler
 	http.HandleFunc("/", func(w http.ResponseWriter, req *http.Request) {
+	    w.Header().Set("Content-Type", "text/html; charset=utf-8")
 		io.WriteString(w, "httptail start...\n")
 		w.(http.Flusher).Flush()
 		topic := req.URL.Path[1:]
