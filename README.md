@@ -9,6 +9,10 @@ Require
     * Golang (test 1.0.3)
     * Redis  (test 2.6.x)
 
+Install
+====
+    $ go get github.com/smallfish/httptail
+
 Usage
 ====
 
