@@ -51,7 +51,7 @@ func serverModeHandler(redis, bind string) {
 		}
 		defer rc.conn.Close()
 		w.Header().Set("Content-Type", "text/html; charset=utf-8")
-		io.WriteString(w, "httptail start...\n")
+		io.WriteString(w, "httptail start...</br>")
 		w.(http.Flusher).Flush()
 		topic := req.URL.Path[1:]
 		command := fmt.Sprintf(redisSubProtocol, len(topic), topic)
@@ -77,11 +77,11 @@ func serverModeHandler(redis, bind string) {
 						count, _ := strconv.ParseInt(resp[1:], 10, 0)
 						buf := make([]byte, count+2)
 						io.ReadFull(rc.buffer, buf)
-						row = append(row, string(buf[:count]))
+						string_to_append := strings.Replace(string(buf[:count]),"\n","</br>",-1)
+						row = append(row, string_to_append )
 					}
 				}
-				io.WriteString(w, strings.Join(row[1:], " "))
-				io.WriteString(w, "<br/>")
+				io.WriteString(w, strings.Join(row[2:], " "))
 				w.(http.Flusher).Flush()
 			}
 		}
