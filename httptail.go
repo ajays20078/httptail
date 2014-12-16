@@ -81,6 +81,7 @@ func serverModeHandler(redis, bind string) {
                     }
                 }
                 io.WriteString(w, strings.Join(row[1:], " "))
+		io.WriteString(w, "</br>")
                 w.(http.Flusher).Flush()
             }
         }
